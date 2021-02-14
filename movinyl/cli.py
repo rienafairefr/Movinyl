@@ -12,6 +12,7 @@ import tqdm
 from PIL import Image
 
 from color_picker import get_points, kmeans
+from movinyl.disk import generate
 
 
 @click.group()
@@ -80,17 +81,21 @@ def disk(dir, n):
             return
 
         save_png = os.path.join(file_without_ext, 'save.png')
-        process = subprocess.Popen([os.path.join(os.getcwd(), 'src', 'disk', 'disk'), str(n)],
-                                   cwd=os.path.join(file_without_ext), stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-        with tqdm.tqdm(total=n, desc="Generating and merging disk images...") as pbar:
-            while process.poll() is None:
-                line = process.stdout.readline()
-                try:
-                    p = int(line)
-                    pbar.update(10)
-                except ValueError:
-                    pass
+        generate(2000)
+        #process = subprocess.Popen([os.path.join(os.getcwd(), 'src', 'disk', 'disk'), str(n)],
+         #                          cwd=os.path.join(file_without_ext), stdout=subprocess.PIPE)
+
+        #previous = 0
+        #with tqdm.tqdm(total=n, desc="generating & merging disk images...") as pbar:
+        #    while process.poll() is None:
+        #        line = process.stdout.readline()
+        #        try:
+        #            p = int(line)
+        #            pbar.update(p - previous)
+        #            previous = p
+        #        except ValueError:
+        #            pass
 
         shutil.move(save_png, file_underscores)
 

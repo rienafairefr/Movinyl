@@ -1,6 +1,0 @@
-PyQt5
-PyQt5-stubs
-Pillow
-python-magic
-click
-ffpb

@@ -2,6 +2,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <string>
+#include <pybind11/pybind11.h>
 using namespace cv;
 
 //this does the same thing as the regular disk, but it outputs only one color per frame. Not as color acurate but should be MUCH faster.
@@ -28,6 +29,12 @@ void GenerateDisk(int FrameNumber)
 		circle(out, Point(FrameNumber, FrameNumber), FrameNumber - i, Scalar(colorS.val[0], colorS.val[1], colorS.val[2], 255), 8, 1);
 	}
 	imwrite("save.png", out);
+}
+
+PYBIND11_MODULE(disk_mono, m) {
+    m.doc() = "GenerateDiskMono"; // optional module docstring
+    m.attr("__name__") = "movinyl.disk_mono"; // The default would be just "foo"
+    m.def("generate", &GenerateDisk, "Generates a Monochromatic Disk from movie snapshots");
 }
 
 int main(int argc, char const *argv[])

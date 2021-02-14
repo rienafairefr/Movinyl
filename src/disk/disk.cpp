@@ -4,7 +4,7 @@
 #include <string>
 #include <omp.h>
 #include <iostream>
-
+#include <pybind11/pybind11.h>
 using namespace cv;
 
 //some movies have a black border of a few pixels.
@@ -105,6 +105,12 @@ void GenerateDisk(int FrameNumber) {
 		max(final, vectorOfMatrices[i], final);
 	}
 	imwrite("save.png", final);
+}
+
+PYBIND11_MODULE(disk, m) {
+    m.doc() = "GenerateDisk"; // optional module docstring
+    m.attr("__name__") = "movinyl.disk"; // The default would be just "foo"
+    m.def("generate", &GenerateDisk, "Generates a Disk from movie snapshots");
 }
 
 int main(int argc, char const *argv[])

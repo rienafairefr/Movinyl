@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <pybind11/pybind11.h>
 using namespace cv;
 #include <iostream>
 #include <opencv2/core/core.hpp>
@@ -145,6 +146,13 @@ void insert_in_frame(std::string name, int aa1, int aa2, int aa3, int aa4, int a
 	s_out += "_page.png";
 
 	imwrite(s_out, out);
+}
+
+
+PYBIND11_MODULE(page, m) {
+    m.doc() = "GeneratePage"; // optional module docstring
+    m.attr("__name__") = "movinyl.page"; // The default would be just "foo"
+    m.def("generate", &insert_in_frame, "Generates a Page from a Disk");
 }
 
 int main(int argc, char const *argv[])

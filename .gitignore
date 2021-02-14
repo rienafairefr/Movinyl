@@ -7,3 +7,10 @@ pymdb
 *.png
 *.pyc
 .DS_Store
+.idea/
+build/
+*.egg-info
+*.so
+tmp/
+
+dist/

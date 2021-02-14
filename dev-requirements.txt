@@ -1,0 +1,4 @@
+pkgconfig
+setuptools-cpp
+wheel
+cibuildwheel==1.8.0
