@@ -19,6 +19,7 @@ alternatives --install /usr/local/bin/cmake cmake /usr/bin/cmake3 20
 mkdir ~/opencv_build && cd ~/opencv_build
 git clone https://github.com/opencv/opencv.git --depth 1 --branch 4.4.0
 git clone https://github.com/opencv/opencv_contrib.git --depth 1 --branch 4.4.0
+ls -al ~/opencv_build/opencv_contrib/
 cd ~/opencv_build/opencv && mkdir build && cd build
 
 cmake3 -D CMAKE_BUILD_TYPE=RELEASE \
