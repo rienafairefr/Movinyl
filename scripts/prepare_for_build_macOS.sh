@@ -2,6 +2,8 @@
 
 set -e
 
+pip install -r dev-requirements.txt
+
 brew update
 
 mkdir ~/opencv_build && cd ~/opencv_build

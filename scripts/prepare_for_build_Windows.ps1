@@ -2,6 +2,8 @@
 
 set -e
 
+pip install -r dev-requirements.txt
+
 choco install opencv
 
 yum install -y epel-release git gcc gcc-c++ cmake3 qt5-qtbase-devel \

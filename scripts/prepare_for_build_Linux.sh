@@ -2,6 +2,8 @@
 
 set -e
 
+pip install -r dev-requirements.txt
+
 yum update
 
 yum -y install epel-release git gcc gcc-c++ cmake3 qt5-qtbase-devel \
