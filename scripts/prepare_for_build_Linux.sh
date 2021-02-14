@@ -11,6 +11,9 @@ yum -y install epel-release git gcc gcc-c++ cmake3 qt5-qtbase-devel \
     eigen3-devel gstreamer-plugins-base-devel freeglut-devel mesa-libGL \
     mesa-libGL-devel boost boost-thread boost-devel libv4l-devel
 
+alternatives --install /usr/local/bin/cmake cmake /usr/bin/cmake 10
+alternatives --install /usr/local/bin/cmake cmake /usr/bin/cmake3 20
+
 mkdir ~/opencv_build && cd ~/opencv_build
 git clone https://github.com/opencv/opencv.git --depth 1 --branch 4.4.0
 git clone https://github.com/opencv/opencv_contrib.git --depth 1 --branch 4.4.0
