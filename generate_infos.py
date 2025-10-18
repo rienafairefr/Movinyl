@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -56,6 +57,11 @@ def main():
         print("Error: Invalid input format.")
         return
 
+    if len(sys.argv) > 2:
+        language = sys.argv[2]
+    else:
+        language = "en"
+
     year = word_list[-1]
     length = len(raw)
     movie_name = raw[:length-4]
@@ -70,11 +76,22 @@ def main():
         return
 
     for s in search.results:
-        if re.sub(r"[^\w]", " ", s['release_date']).split()[0] == year:
+        release_date = s['release_date']
+        if release_date == '':
+            continue
+        split_release_date = re.sub(r"[^\w]", " ", release_date)
+        if split_release_date.split()[0] == year:
             id = s['id']
             m = tmdb.Movies(id)
             response = m.info()
-            movie_name = m.original_title
+
+            if language is None:
+                movie_name = m.original_title
+            else:
+
+                for title in  m.alternative_titles()['titles']:
+                    if title['iso_3166_1'].lower() == language.lower():
+                        movie_name = title['title']
             duration = str(m.runtime) + "'"
             response = m.credits()
             for credit in m.crew:

@@ -96,8 +96,9 @@ def disk(dir, n):
 
 
 @main.command()
-@click.argument('dir', default="PROCESSING_ZONE")
-def page(dir):
+@click.argument('directory', default="PROCESSING_ZONE")
+@click.option('--language', default="en")
+def page(directory, language):
     files = os.listdir(dir)
     for file in files:
         file_path = os.path.join(dir, file)
@@ -128,7 +129,7 @@ def page(dir):
         colors = colorz(file_png, 5)
         popen = [os.path.join(os.getcwd(), 'src', 'page', 'page'), name] + colors
         print(" ".join(popen))
-        subprocess.check_output([sys.executable, 'generate_infos.py', name])
+        subprocess.check_output([sys.executable, 'generate_infos.py', name, language])
         shutil.move('titre.png', os.path.join(dir, 'titre.png'))
         shutil.move('année.png', os.path.join(dir, 'année.png'))
         shutil.move('réalisateur.png', os.path.join(dir, 'réalisateur.png'))
